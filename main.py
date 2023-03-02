@@ -44,4 +44,9 @@ for clip in clips_data['data']:
 for link in clip_to_download:
     os.system(f'twitch-dl download -q 1080p {link}')
 
-
+def preparing_videos():
+    files_to_montage = []
+    for file in os.listdir('./'):
+        if file.endswith('.mp4'):
+            files_to_montage.append(file)
+    return files_to_montage
