@@ -1,8 +1,9 @@
+import moviepy.editor
 import requests
 from datetime import date, timedelta
 import os
 from moviepy.editor import VideoFileClip
-
+from pathlib import Path
 
 yesterday = date.today() - timedelta(1)
 yesterday = str(yesterday)
@@ -45,3 +46,22 @@ for link in clip_to_download:
     os.system(f'twitch-dl download -q 1080p {link}')
 
 
+def preparing_videos(title):
+    files_to_montage = []
+    for file in sorted(Path('./').iterdir(), key=os.path.getmtime):
+        if str(file).endswith('.mp4'):
+            files_to_montage.append(file)
+    return files_to_montage, title
+
+
+def creating_video(files, title):
+    fragments = []
+    for file in files:
+        fragments.append(VideoFileClip(file))
+    video = moviepy.editor.concatenate_videoclips(fragments)
+    video.write_videofile(f"{title} | Daily zupa z kretem")
+    return None
+
+
+video_fragments = preparing_videos(title)
+creating_video(video_fragments[0], video_fragments[1])
