@@ -9,7 +9,6 @@ import time
 
 client_id = '37zxvqwg12hts6aji5ucmd34h36pww'
 client_secret = 'afw6htfiii1ipgogjuo722f2pln6o5'
-streamer_name = 'xntentacion'
 
 
 body = {
@@ -72,7 +71,7 @@ def creating_video(files):
 
 
 def upload(title):
-    os.system(f'python upload_video.py --file="youtube.mp4" --title="{title} | Daily Soup of Kret" --description="Najlepsze shoty z ostatniego streama, tworzone automatycznie" --keywords="chess, szachy, xntentacion, stream, shorts" --category="24" --privacyStatus="public"')
+    os.system(f'python upload_video.py --file="youtube.mp4" --title="{title} | Daily Soup of Kret" --description="Najlepsze shoty z ostatniego dnia" --keywords="chess, szachy, xntentacion, stream, shorts" --category="24" --privacyStatus="public"')
     return None
 
 
@@ -80,6 +79,7 @@ def delete_videos():
     for file in os.listdir("."):
         if file.endswith(".mp4"):
             os.remove(os.path.join(".", file))
+    print('videos were deleted')
     return None
 
 
